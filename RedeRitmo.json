@@ -1,0 +1,885 @@
+{
+  "name": "Rede Ritmo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "Thaize",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "70a9c307-e5ae-4fe3-8665-19df806ca0fc",
+      "name": "Disparar gatilhos",
+      "webhookId": "e6c9d0d6-0751-4b97-ae0e-a05145d2458e"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7306a30f-22a5-464c-86cc-db0c0ff42342",
+              "name": "nome",
+              "value": "={{ $json.body.nome }}",
+              "type": "string"
+            },
+            {
+              "id": "8ced1b2c-3ab9-4210-90b2-f4b68d380853",
+              "name": "email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "df6be8b3-9e59-4cb7-b4ac-6ebe7514d39f",
+              "name": "whatsapp",
+              "value": "={{ $json.body.whatsapp }}",
+              "type": "string"
+            },
+            {
+              "id": "e63294f0-693b-47c4-bf0e-3c9c18062907",
+              "name": "unidade",
+              "value": "={{ $json.body.unidade }}",
+              "type": "string"
+            },
+            {
+              "id": "8e6edc0c-1997-4fd6-83d0-2d0ea2dbce08",
+              "name": "modalidade",
+              "value": "={{ $json.body.modalidade }}",
+              "type": "string"
+            },
+            {
+              "id": "1f86cf4c-5d2b-49d1-8b22-6a98e209a539",
+              "name": "inicio",
+              "value": "={{ $json.body.inicio }}",
+              "type": "string"
+            },
+            {
+              "id": "31ec8370-f17f-450f-96d5-5ab491bdcaec",
+              "name": "site",
+              "value": "={{ $json.body.site }}",
+              "type": "string"
+            },
+            {
+              "id": "55bb646c-604e-4fe4-97df-357116237e1e",
+              "name": "consentimento",
+              "value": "={{ $json.body.consentimento }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "60428d7f-1195-42e4-9343-b8c993ffa51b",
+      "name": "Variaveis"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cad18585-8153-443a-9ea7-4ce9299e9b67",
+              "name": "nome",
+              "value": "={{ $json.nome.trim().toLowerCase().toTitleCase() }}",
+              "type": "string"
+            },
+            {
+              "id": "bdf38c66-fc61-4707-b613-6e6764010050",
+              "name": "email",
+              "value": "={{ $json.email.trim().toLowerCase() }}",
+              "type": "string"
+            },
+            {
+              "id": "2e881245-802e-44fb-a8a0-adbdeb5a2ee6",
+              "name": "whatsapp",
+              "value": "={{ $json.whatsapp.replace(/\\D/g, '') }}",
+              "type": "string"
+            },
+            {
+              "id": "46fb322c-3bed-4185-989f-b4035eb64e8c",
+              "name": "unidade",
+              "value": "={{ $json.unidade }}",
+              "type": "string"
+            },
+            {
+              "id": "de86bcd4-00c7-4a69-8750-cfec0e1d9db3",
+              "name": "modalidade",
+              "value": "={{ $json.modalidade }}",
+              "type": "string"
+            },
+            {
+              "id": "31cf492c-a9e6-4cd7-8e77-7789de35b83d",
+              "name": "inicio",
+              "value": "={{ $json.inicio }}",
+              "type": "string"
+            },
+            {
+              "id": "a39d65df-560e-411b-9990-e0645a5c977b",
+              "name": "site",
+              "value": "={{ $json.site || \"\"}}",
+              "type": "string"
+            },
+            {
+              "id": "c728a4ef-902b-4675-aecd-b962be5cdecc",
+              "name": "consentimento",
+              "value": "={{ $json.consentimento }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "4a44b9f3-550f-4c01-a2ff-63a6c772293a",
+      "name": "Normalizar Dados"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "Qp58Wx0I98nU2wsO",
+          "mode": "list",
+          "cachedResultName": "leads",
+          "cachedResultUrl": "/projects/aiGUNDRUJeWnOTR2/datatables/Qp58Wx0I98nU2wsO"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "whatsapp": "={{ $('Normalizar Dados').item.json.whatsapp }}",
+            "consentimento": "={{ $('Normalizar Dados').item.json.consentimento }}",
+            "Email": "={{ $('Normalizar Dados').item.json.email }}",
+            "Nome": "={{ $('Normalizar Dados').item.json.nome }}",
+            "inicio": "={{ $('Normalizar Dados').item.json.inicio }}",
+            "Unidade": "={{ $('Normalizar Dados').item.json.unidade }}",
+            "modalidade": "={{ $('Normalizar Dados').item.json.modalidade }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "whatsapp",
+              "displayName": "whatsapp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "inicio",
+              "displayName": "inicio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "consentimento",
+              "displayName": "consentimento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Unidade",
+              "displayName": "Unidade",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "modalidade",
+              "displayName": "modalidade",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        2000,
+        32
+      ],
+      "id": "232431b9-14ff-45b6-b645-b0f6e3fea88b",
+      "name": "Adcionar Lead"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"sucesso\": true,\n  \"mensagem\": \"Pedido recebido com sucesso! A equipe da unidade escolhida falará com você em breve.\"\n}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2256,
+        32
+      ],
+      "id": "a26ba859-b331-4b68-8ec7-d10d76541e6e",
+      "name": "Responder Sucesso"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "4a7358d1-91eb-444e-952e-eea515608f83",
+              "leftValue": "={{ $json.site }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "1caf1060-9184-442a-a3e8-ed7f50c528c7",
+              "leftValue": "={{ $json.nome }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "83904ec3-f77d-49c0-84c9-09bbbe31c85c",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        672,
+        0
+      ],
+      "id": "b00d621e-fa31-4139-99fc-266f3e52e2fc",
+      "name": "Validar Dados e Honeypot"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"sucesso\": false,\n  \"mensagem\": \"Verifique os dados informados. Nome obrigatório e e-mail válido são necessários.\"\n}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        976,
+        160
+      ],
+      "id": "2a935723-ad48-42b1-bb75-214959444ff2",
+      "name": "Erro Validacao"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "Qp58Wx0I98nU2wsO",
+          "mode": "list",
+          "cachedResultName": "leads",
+          "cachedResultUrl": "/projects/aiGUNDRUJeWnOTR2/datatables/Qp58Wx0I98nU2wsO"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "Email",
+              "keyValue": "={{ $('Normalizar Dados').item.json.email }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        -80
+      ],
+      "id": "edfd0916-e64b-4491-bd7f-484c28f3ad2d",
+      "name": "BloquearRepetido",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "63164f98-dd0a-4e04-9df6-38dd971de007",
+              "leftValue": "={{ $json.Email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        1104,
+        -80
+      ],
+      "id": "cf0e31ce-ee73-4da2-933d-a23d3c42a25d",
+      "name": "Verificar Duplicidade"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"ok\": false,\n  \"sucesso\": false,\n  \"message\": \"Já recebemos uma solicitação com este e-mail! Nossa equipe entrará em contato em breve.\",\n  \"mensagem\": \"Já recebemos uma solicitação com este e-mail! Nossa equipe entrará em contato em breve.\"\n}",
+        "options": {
+          "responseCode": 409
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1344,
+        -160
+      ],
+      "id": "1102d4f9-bbea-4779-97e9-d5f44e059f66",
+      "name": "Erro Duplicado"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Normalizar Dados').item.json.inicio }}",
+                    "rightValue": "esta-semana",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "e0dfacee-6e49-4468-a46a-a7ece994195c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Quente"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "4394ff7d-5823-4d77-95c3-70e0445c3347",
+                    "leftValue": "={{ $('Normalizar Dados').item.json.inicio }}",
+                    "rightValue": "este-mes",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Morno"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "0551835e-f608-4893-9f51-a97fb83e8be7",
+                    "leftValue": "={{ $('Normalizar Dados').item.json.inicio }}",
+                    "rightValue": "pesquisando",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Frio"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.5,
+      "position": [
+        1392,
+        80
+      ],
+      "id": "efd03364-7a94-4621-8a59-5d518f4fcfa6",
+      "name": "classificar Prioridade"
+    },
+    {
+      "parameters": {
+        "listId": "6b076feb07429bf8461dfdca",
+        "name": "={{ $('Normalizar Dados').item.json.nome }} - {{ $('Normalizar Dados').item.json.unidade }}",
+        "description": "= {{ $('Normalizar Dados').item.json.modalidade }} - {{ $('Normalizar Dados').item.json.whatsapp }} - {{ $('Normalizar Dados').item.json.email }}\nPode ser contatado: {{ $('Normalizar Dados').item.json.consentimento }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        1664,
+        -176
+      ],
+      "id": "2ee4732e-c47d-4a4b-af9b-cd074fe95778",
+      "name": "Quente",
+      "credentials": {
+        "trelloApi": {
+          "id": "tCfCFPnydfDoC1Tx",
+          "name": "TrelloRedeRitmo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "listId": "6b076fe7fe2a3368a2991ab9",
+        "name": "= {{ $('Normalizar Dados').item.json.nome }}- {{ $('Normalizar Dados').item.json.unidade }}",
+        "description": "={{ $('Normalizar Dados').item.json.modalidade }} - {{ $('Normalizar Dados').item.json.whatsapp }} - {{ $('Normalizar Dados').item.json.email }}\nPode ser contatado: {{ $('Normalizar Dados').item.json.consentimento }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        1664,
+        32
+      ],
+      "id": "99f79a78-c7ba-4545-9e3b-e30b2b0427d8",
+      "name": "Morno",
+      "credentials": {
+        "trelloApi": {
+          "id": "tCfCFPnydfDoC1Tx",
+          "name": "TrelloRedeRitmo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "listId": "6b076fe1fafb0643904cdf85",
+        "name": "={{ $('Normalizar Dados').item.json.nome }} - {{ $('Normalizar Dados').item.json.unidade }}",
+        "description": "={{ $('Normalizar Dados').item.json.modalidade }} - {{ $('Normalizar Dados').item.json.whatsapp }} - {{ $('Normalizar Dados').item.json.email }}\nPode ser contatado: {{ $('Normalizar Dados').item.json.consentimento }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        1664,
+        224
+      ],
+      "id": "19d079a9-afa2-4e82-b8b0-6eeff6b4f359",
+      "name": "Frio",
+      "credentials": {
+        "trelloApi": {
+          "id": "tCfCFPnydfDoC1Tx",
+          "name": "TrelloRedeRitmo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Configurações do Workflow\nFluxo de automação da campanha de aula experimental gratuita da Rede Ritmo (unidades Centro, Estreito e São José). Recebe leads via Webhook (POST), padroniza os dados, valida campos obrigatórios, formato de e-mail, honeypot contra robôs e duplicidade, classifica em Quente, Morno ou Frio, aciona a equipe/integração externa, salva o lead na tabela e retorna a confirmação ou mensagem de erro para a página.",
+        "height": 176,
+        "width": 896
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        832,
+        -832
+      ],
+      "typeVersion": 1,
+      "id": "b02c75d6-1508-4f97-bdf0-84f93cefba7e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Entrada e Padronização dos Dados\n• Recebe o envio do formulário da página da campanha via Webhook (POST) e aguarda o nó final responder à interface.\n\n• Extrai os campos enviados e padroniza os dados: remove espaços extras nas pontas, converte o e-mail para minúsculas e mantém apenas os números no WhatsApp.",
+        "height": 272,
+        "width": 416,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        352,
+        -576
+      ],
+      "typeVersion": 1,
+      "id": "be0d4d89-e569-41d2-8e1a-202cbfa6f86b",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Validações e Segurança \n• Verifica se o campo isca (honeypot) está vazio (anti-robô), se o nome foi preenchido e se o e-mail tem formato válido.\n\n• Consulta a tabela para impedir pedidos repetidos do mesmo lead.\n\n• Em caso de falha ou duplicidade, interrompe o cadastro e retorna mensagem clara (400 ou 409) para o formulário.",
+        "height": 272,
+        "width": 416,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        832,
+        -576
+      ],
+      "typeVersion": 1,
+      "id": "0a1084a7-aba6-45e2-950c-2eeb658fbcc1",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Regra de Negócio e Integração\n• Classifica os leads válidos em 3 caminhos conforme o prazo de início:\n\nQuente: começa esta semana (prioridade máxima de contato).\n\nMorno: começa este mês.\n\nFrio: apenas pesquisando.\n• Envia o aviso/tarefa para o trello usando credenciais seguras do n8n para acionar a unidade correspondente.",
+        "height": 272,
+        "width": 416,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1328,
+        -576
+      ],
+      "typeVersion": 1,
+      "id": "1af46655-cffc-4433-ba58-181da221d7c3",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Registro e Resposta\n• Grava o lead já padronizado e classificado na tabela para manter o histórico completo da campanha.\n\n• Retorna a confirmação JSON ao Webhook para a página exibir o feedback imediato ao usuário.",
+        "height": 272,
+        "width": 416,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1824,
+        -576
+      ],
+      "typeVersion": 1,
+      "id": "f76717fe-8cef-475e-af7c-a622fdfff526",
+      "name": "Sticky Note4"
+    }
+  ],
+  "pinData": {
+    "Disparar gatilhos": [
+      {
+        "json": {
+          "headers": {
+            "host": "thaize.app.n8n.cloud",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+            "content-length": "139",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "accept-language": "pt-BR,pt;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+            "cdn-loop": "cloudflare; loops=1; subreqs=1",
+            "cf-connecting-ip": "2804:30c:3958:3f00:2c72:9d69:661b:a7b1",
+            "cf-ew-via": "15",
+            "cf-ipcountry": "BR",
+            "cf-ray": "a60404fb49144468-NVT",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "cf-worker": "n8n.cloud",
+            "content-type": "application/x-www-form-urlencoded;charset=UTF-8",
+            "origin": "https://rederitimoprojetothaize.base44.app",
+            "priority": "u=1, i",
+            "referer": "https://rederitimoprojetothaize.base44.app/",
+            "sec-ch-ua": "\"Chromium\";v=\"158\", \"Not.A/Brand\";v=\"24\", \"Microsoft Edge\";v=\"158\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "2804:30c:3958:3f00:2c72:9d69:661b:a7b1, 172.68.191.168",
+            "x-forwarded-host": "thaize.app.n8n.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "traefik-prod-users-gwc-93-59f57ff78b-vk9bj",
+            "x-is-trusted": "yes",
+            "x-real-ip": "2804:30c:3958:3f00:2c72:9d69:661b:a7b1"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "nome": "thaze",
+            "whatsapp": "5898566598",
+            "email": "thaibertelli@hotmail.com",
+            "unidade": "estreito",
+            "modalidade": "musculacao",
+            "inicio": "pesquisando",
+            "consentimento": "sim",
+            "site": ""
+          },
+          "webhookUrl": "https://thaize.app.n8n.cloud/webhook/Thaize",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Disparar gatilhos": {
+      "main": [
+        [
+          {
+            "node": "Variaveis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Variaveis": {
+      "main": [
+        [
+          {
+            "node": "Normalizar Dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalizar Dados": {
+      "main": [
+        [
+          {
+            "node": "Validar Dados e Honeypot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Adcionar Lead": {
+      "main": [
+        [
+          {
+            "node": "Responder Sucesso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Responder Sucesso": {
+      "main": [
+        []
+      ]
+    },
+    "Validar Dados e Honeypot": {
+      "main": [
+        [
+          {
+            "node": "BloquearRepetido",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Erro Validacao",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BloquearRepetido": {
+      "main": [
+        [
+          {
+            "node": "Verificar Duplicidade",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar Duplicidade": {
+      "main": [
+        [
+          {
+            "node": "Erro Duplicado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "classificar Prioridade",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "classificar Prioridade": {
+      "main": [
+        [
+          {
+            "node": "Quente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Morno",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Frio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Quente": {
+      "main": [
+        [
+          {
+            "node": "Adcionar Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Morno": {
+      "main": [
+        [
+          {
+            "node": "Adcionar Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Frio": {
+      "main": [
+        [
+          {
+            "node": "Adcionar Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "5bc7676c-98f4-4b49-9448-00ca35bf15e6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a66545ead5fddca2c184c4e00fa8665eaffbdab790c272070adddfeb6434028b"
+  },
+  "nodeGroups": [],
+  "id": "mOncAyZUSTAcuDiw",
+  "tags": []
+}
